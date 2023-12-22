@@ -1,6 +1,8 @@
 package com.example.healthcareapplication.service.impl;
 
 import com.example.healthcareapplication.model.Reaction;
+import com.example.healthcareapplication.model.dto.DataResponse;
+import com.example.healthcareapplication.repository.ReactionHistoryRepository;
 import com.example.healthcareapplication.repository.ReactionRepository;
 import com.example.healthcareapplication.service.ReactionService;
 import lombok.AllArgsConstructor;

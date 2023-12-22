@@ -12,11 +12,11 @@ import java.io.Serializable;
 @Getter
 @Setter
 @SuperBuilder
-@Table(name = "reaction")
+@Table(name = "tag")
 public class Tag implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    @Column(name = "name")
     private String name;
 }

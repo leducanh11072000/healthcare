@@ -19,7 +19,7 @@ public class UserController {
     }
 
     @PostMapping("/user/register")
-    DataResponse register(RegisterUserDTO registerUserDTO){
+    DataResponse register(@RequestBody RegisterUserDTO registerUserDTO){
         return  userService.register(registerUserDTO);
     }
 }

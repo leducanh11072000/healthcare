@@ -54,6 +54,7 @@ public class UserServiceimpl implements UserService {
         User newUser = User.builder()
                 .userName(registerUserDTO.getUsername())
                 .email(registerUserDTO.getEmail())
+                .password(registerUserDTO.getPassword())
                 .avatarAddress(registerUserDTO.getAvatarAddress())
                 .tagName("@"+registerUserDTO.getUsername())
                 .build();

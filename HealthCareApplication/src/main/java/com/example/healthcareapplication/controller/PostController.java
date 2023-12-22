@@ -18,7 +18,7 @@ public class PostController {
     private PostService postService;
 
 
-    @GetMapping("/post/{userId}")
+    @GetMapping("/post/user/{userId}")
     DataResponse getAllByUserId (@Valid @NotNull @Positive @PathVariable Long userId, @RequestParam @Positive Long pageNo,@RequestParam @Positive Long pageSize) {
         return postService.getAllByUserId(userId,pageNo,pageSize);
     };
@@ -32,7 +32,7 @@ public class PostController {
         return postService.insertPost(insertPostDTO);
     }
 
-    @GetMapping("/post/{tagId}")
+    @GetMapping("/post/tag/{tagId}")
     DataResponse getSomeByTagId(@Valid @NotNull @Positive @PathVariable Long tagId, @RequestParam @Positive Long pageNo,@RequestParam @Positive Long pageSize){
         return postService.getSomeByTagId(tagId,pageNo, pageSize);
     }
