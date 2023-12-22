@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 public class UserLoginDto {
   @NotBlank(message = "userName must be not blank")
-  protected String userName;
+  protected String username;
   @NotBlank(message = "password must be not blank")
   protected String password;
 }

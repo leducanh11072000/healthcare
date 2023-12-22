@@ -14,8 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import java.util.StringJoiner;
-
 @AllArgsConstructor
 @Slf4j
 @Service
@@ -28,8 +26,8 @@ public class UserServiceimpl implements UserService {
     }
     @Override
     public DataResponse login(UserLoginDto userLoginDto) {
-        User user = userRepository.findByUserName(userLoginDto.getUserName()).orElse(null);
-        if (user ==null) return new DataResponse(HttpStatus.BAD_REQUEST, "Tên người dùng hoặc mật khẩu không đúng", null);
+        User user = userRepository.findByUserName(userLoginDto.getUsername()).orElse(null);
+        if (user == null) return new DataResponse(HttpStatus.BAD_REQUEST, "Tên người dùng hoặc mật khẩu không đúng", null);
         if (user.getPassword().equals(userLoginDto.getPassword())) {
             return new DataResponse(HttpStatus.OK, Common.SUCCESS, UserInfoDTO.builder()
                     .id(user.getId())
