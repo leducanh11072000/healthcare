@@ -45,6 +45,9 @@ public class UserServiceimpl implements UserService {
 
     @Override
     public DataResponse register(RegisterUserDTO registerUserDTO) {
+        if (registerUserDTO.getPassword().equals(registerUserDTO.getRepeatPassword())) {
+            return new DataResponse(HttpStatus.BAD_REQUEST, "nhập lại mật khẩu không trùng khớp, xin kiểm tra lại", null);
+        }
         User user = userRepository.findByUserName(registerUserDTO.getUsername()).orElse(null);
         if (user !=null) return new DataResponse(HttpStatus.BAD_REQUEST, "tên đăng nhập đã tồn tại", null);
 
