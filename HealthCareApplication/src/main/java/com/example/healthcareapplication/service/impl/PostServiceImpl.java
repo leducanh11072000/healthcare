@@ -36,10 +36,10 @@ public class PostServiceImpl implements PostService {
         try {
             List<Post> postList = postRepository.getAllByUserIdAndStatus(userId, DataUtils.getPageable(pageNo, pageSize),Common.ACTIVE_STATUS);
             List<PostResponseDTO> postResponseDTOS = convertFromPost(postList);
-            return new DataResponse(HttpStatus.OK, Common.SUCCESS,postResponseDTOS);
+            return new DataResponse(HttpStatus.OK.value(), Common.SUCCESS,postResponseDTOS);
         }catch (Exception e) {
             log.error(e.getMessage(),e);
-            return new DataResponse(HttpStatus.BAD_REQUEST,e.getMessage(),null);
+            return new DataResponse(HttpStatus.BAD_REQUEST.value(),e.getMessage(),null);
         }
     }
 
@@ -48,10 +48,10 @@ public class PostServiceImpl implements PostService {
         try {
             List<Post> postList = postRepository.findAll(DataUtils.getPageable(pageNo, pageSize)).stream().filter(post -> Common.ACTIVE_STATUS.equals(post.getStatus())).toList();
             List<PostResponseDTO> postResponseDTOS = convertFromPost(postList);
-            return new DataResponse(HttpStatus.OK, Common.SUCCESS,postResponseDTOS);
+            return new DataResponse(HttpStatus.OK.value(), Common.SUCCESS,postResponseDTOS);
         }catch (Exception e) {
             log.error(e.getMessage(),e);
-            return new DataResponse(HttpStatus.BAD_REQUEST,e.getMessage(),null);
+            return new DataResponse(HttpStatus.BAD_REQUEST.value(),e.getMessage(),null);
         }
     }
 
@@ -92,10 +92,10 @@ public class PostServiceImpl implements PostService {
                     .watchTime(0L)
                     .build();
             Post result = postRepository.save(post);
-            return new DataResponse(HttpStatus.OK, Common.SUCCESS,result);
+            return new DataResponse(HttpStatus.OK.value(), Common.SUCCESS,result);
         } catch (Exception e) {
             log.error(e.getMessage(),e);
-            return new DataResponse(HttpStatus.BAD_REQUEST,e.getMessage(),null);
+            return new DataResponse(HttpStatus.BAD_REQUEST.value(),e.getMessage(),null);
         }
     }
 
@@ -107,10 +107,10 @@ public class PostServiceImpl implements PostService {
             String keyword = stringJoinerWithPrefixSufix.toString();
             List<Post> postList = postRepository.getAllByTagsIdAndStatus(keyword,Common.ACTIVE_STATUS,DataUtils.getPageable(pageNo, pageSize)).stream().toList();
             List<PostResponseDTO> postResponseDTOS = convertFromPost(postList);
-            return new DataResponse(HttpStatus.OK, Common.SUCCESS,postResponseDTOS);
+            return new DataResponse(HttpStatus.OK.value(), Common.SUCCESS,postResponseDTOS);
         }catch (Exception e) {
             log.error(e.getMessage(),e);
-            return new DataResponse(HttpStatus.BAD_REQUEST,e.getMessage(),null);
+            return new DataResponse(HttpStatus.BAD_REQUEST.value(),e.getMessage(),null);
         }
     }
 
@@ -119,12 +119,12 @@ public class PostServiceImpl implements PostService {
         Post post = postRepository.getPostByIdAndStatus(updatePostDTO.getPostId(),Common.ACTIVE_STATUS);
         if (post == null || post.getUserId().equals(updatePostDTO.getUserId())) {
             log.error("Không tìm thấy thông tin bài viết hoặc người dùng không có quyền sửa");
-            return new DataResponse(HttpStatus.BAD_REQUEST,"Không tìm thấy thông tin bài viết hoặc người dùng không có quyền sửa",null);
+            return new DataResponse(HttpStatus.BAD_REQUEST.value(),"Không tìm thấy thông tin bài viết hoặc người dùng không có quyền sửa",null);
         }
         post.setContent(updatePostDTO.getNewContent());
         post.setTitle(updatePostDTO.getNewTitle());
         postRepository.save(post);
-        return new DataResponse(HttpStatus.OK, Common.SUCCESS,post);
+        return new DataResponse(HttpStatus.OK.value(), Common.SUCCESS,post);
     }
 
     @Override
@@ -132,11 +132,11 @@ public class PostServiceImpl implements PostService {
         Post post = postRepository.getPostByIdAndStatus(deletePostDTO.getPostId(),Common.ACTIVE_STATUS);
         if (post == null || post.getUserId().equals(deletePostDTO.getUserId())) {
             log.error("Không tìm thấy thông tin bài viết hoặc người dùng không có quyền xóa");
-            return new DataResponse(HttpStatus.BAD_REQUEST,"Không tìm thấy thông tin bài viết hoặc người dùng không có quyền xóa",null);
+            return new DataResponse(HttpStatus.NOT_FOUND.value(), "Không tìm thấy thông tin bài viết hoặc người dùng không có quyền xóa",null);
         }
         post.setStatus(Common.INACTIVE_STATUS);
         postRepository.save(post);
-        return new DataResponse(HttpStatus.OK, Common.SUCCESS,post);
+        return new DataResponse(HttpStatus.OK.value(), Common.SUCCESS,post);
     }
 
     private List<PostResponseDTO> convertFromPost(List<Post> postList) {

@@ -27,10 +27,10 @@ public class ReactionHistoryServiceImpl  implements ReactionHistoryService {
     public DataResponse getReactionHistoryByUserId(Long userId) {
         try {
             List<ReactionHistory> reactionHistories = reactionHistoryRepository.findAllByUserIdAndStatus(userId,Common.ACTIVE_STATUS);
-            return new DataResponse(HttpStatus.OK, Common.SUCCESS, reactionHistories);
+            return new DataResponse(HttpStatus.OK.value(), Common.SUCCESS, reactionHistories);
         } catch (Exception e) {
             log.error(e.getMessage(),e);
-            return new DataResponse(HttpStatus.BAD_REQUEST, e.getMessage(), null);
+            return new DataResponse(HttpStatus.BAD_REQUEST.value(), e.getMessage(), null);
         }
     }
 
@@ -49,7 +49,7 @@ public class ReactionHistoryServiceImpl  implements ReactionHistoryService {
                         reaction.setDislike(reaction.getDislike()-1);
                     }
                     reactionRepository.save(reaction);
-                    return new DataResponse(HttpStatus.OK, Common.SUCCESS, reactionHistoryRepository.save(reactionHistory));
+                    return new DataResponse(HttpStatus.OK.value(), Common.SUCCESS, reactionHistoryRepository.save(reactionHistory));
                 }
                 reactionHistory.setIsLike(isLike);
                 if (isLike) {
@@ -60,7 +60,7 @@ public class ReactionHistoryServiceImpl  implements ReactionHistoryService {
                     reaction.setDislike(reaction.getDislike()+1);
                 }
                 reactionRepository.save(reaction);
-                return new DataResponse(HttpStatus.OK, Common.SUCCESS,  reactionHistoryRepository.save(reactionHistory));
+                return new DataResponse(HttpStatus.OK.value(), Common.SUCCESS,  reactionHistoryRepository.save(reactionHistory));
             }
             if (isLike) {
                 reaction.setLike(reaction.getLike()+1);
@@ -75,10 +75,10 @@ public class ReactionHistoryServiceImpl  implements ReactionHistoryService {
                     .reactionId(reaction.getId())
                     .isLike(isLike)
                     .build();
-            return new DataResponse(HttpStatus.OK, Common.SUCCESS, reactionHistoryRepository.save(newHistory));
+            return new DataResponse(HttpStatus.OK.value(), Common.SUCCESS, reactionHistoryRepository.save(newHistory));
         } catch (Exception e) {
             log.error(e.getMessage(),e);
-            return new DataResponse(HttpStatus.BAD_REQUEST, e.getMessage(), null);
+            return new DataResponse(HttpStatus.BAD_REQUEST.value(), e.getMessage(), null);
         }
     }
 }

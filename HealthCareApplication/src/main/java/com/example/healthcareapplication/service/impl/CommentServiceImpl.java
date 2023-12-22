@@ -33,10 +33,10 @@ public class CommentServiceImpl implements CommentService {
         try {
             List<Comment> comments = commentRepository.getAllByPostIdAndStatus(postId, Common.ACTIVE_STATUS,DataUtils.getPageable(pageNo,pageSize));
             List<CommentResponseDTO> commentResponseDTOList = convertFromComment(comments);
-            return new DataResponse(HttpStatus.OK, Common.SUCCESS,commentResponseDTOList);
+            return new DataResponse(HttpStatus.OK.value(), Common.SUCCESS,commentResponseDTOList);
         }catch (Exception e) {
             log.error(e.getMessage(),e);
-            return new DataResponse(HttpStatus.BAD_REQUEST,e.getMessage(),null);
+            return new DataResponse(HttpStatus.BAD_REQUEST.value(),e.getMessage(),null);
         }
     }
 
@@ -55,10 +55,10 @@ public class CommentServiceImpl implements CommentService {
                     .reactionId(reaction.getId())
                     .build();
             Comment result = commentRepository.save(comment);
-            return new DataResponse(HttpStatus.OK, Common.SUCCESS, result);
+            return new DataResponse(HttpStatus.OK.value(), Common.SUCCESS, result);
         } catch (Exception e) {
             log.error(e.getMessage(),e);
-            return new DataResponse(HttpStatus.BAD_REQUEST,e.getMessage(),null);
+            return new DataResponse(HttpStatus.BAD_REQUEST.value(),e.getMessage(),null);
         }
     }
 
@@ -68,14 +68,14 @@ public class CommentServiceImpl implements CommentService {
             Comment comment = commentRepository.findById(commentDTO.getId()).orElse(null);
             if (comment == null || comment.getUserId().equals(commentDTO.getUserId())) {
                 log.error("Không tìm thấy thông tin bình luận hoặc người dùng không có quyền sửa");
-                return new DataResponse(HttpStatus.BAD_REQUEST,"Không tìm thấy thông tin bình luận hoặc người dùng không có quyền sửa",null);
+                return new DataResponse(HttpStatus.NOT_FOUND.value(),"Không tìm thấy thông tin bình luận hoặc người dùng không có quyền sửa",null);
             }
             comment.setContent(commentDTO.getContent());
             Comment result = commentRepository.save(comment);
-            return new DataResponse(HttpStatus.OK, Common.SUCCESS, result);
+            return new DataResponse(HttpStatus.OK.value(), Common.SUCCESS, result);
         } catch (Exception e) {
             log.error(e.getMessage(),e);
-            return new DataResponse(HttpStatus.BAD_REQUEST,e.getMessage(),null);
+            return new DataResponse(HttpStatus.BAD_REQUEST.value(),e.getMessage(),null);
         }
     }
 
@@ -85,14 +85,14 @@ public class CommentServiceImpl implements CommentService {
             Comment comment = commentRepository.findById(commentDTO.getId()).orElse(null);
             if (comment == null || comment.getUserId().equals(commentDTO.getUserId())) {
                 log.error("Không tìm thấy thông tin bình luận hoặc người dùng không có quyền xóa");
-                return new DataResponse(HttpStatus.BAD_REQUEST,"Không tìm thấy thông tin bình luận hoặc người dùng không có quyền xóa",null);
+                return new DataResponse(HttpStatus.NOT_FOUND.value(), "Không tìm thấy thông tin bình luận hoặc người dùng không có quyền xóa",null);
             }
             comment.setStatus(Common.INACTIVE_STATUS);
             Comment result = commentRepository.save(comment);
-            return new DataResponse(HttpStatus.OK, Common.SUCCESS, result);
+            return new DataResponse(HttpStatus.OK.value(), Common.SUCCESS, result);
         } catch (Exception e) {
             log.error(e.getMessage(),e);
-            return new DataResponse(HttpStatus.BAD_REQUEST,e.getMessage(),null);
+            return new DataResponse(HttpStatus.BAD_REQUEST.value(),e.getMessage(),null);
         }
     }
     private List<CommentResponseDTO> convertFromComment(List<Comment> comments) {

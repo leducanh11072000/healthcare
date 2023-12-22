@@ -6,8 +6,11 @@ import com.example.healthcareapplication.model.dto.RegisterUserDTO;
 import com.example.healthcareapplication.model.dto.UserInfoDTO;
 import com.example.healthcareapplication.model.dto.UserLoginDto;
 import com.example.healthcareapplication.service.UserService;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestApiV1
 @AllArgsConstructor
@@ -22,5 +25,9 @@ public class UserController {
     @PostMapping("/user/register")
     DataResponse register(@RequestBody RegisterUserDTO registerUserDTO){
         return  userService.register(registerUserDTO);
+    }
+    @PostMapping("/user/update-avatar")
+    DataResponse register(@RequestParam Long userId,@Valid @NotNull @RequestParam("file") MultipartFile multipartFile){
+        return  userService.updateAvatar(userId,multipartFile);
     }
 }
