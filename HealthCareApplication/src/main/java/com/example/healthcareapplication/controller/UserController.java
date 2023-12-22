@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestApiV1
 @AllArgsConstructor
+@CrossOrigin(origins = "http://localhost:5173/account/register")
 public class UserController {
     private final UserService userService;
     @PostMapping("/user/login")
