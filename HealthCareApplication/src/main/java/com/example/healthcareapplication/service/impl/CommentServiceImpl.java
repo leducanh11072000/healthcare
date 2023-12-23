@@ -106,6 +106,7 @@ public class CommentServiceImpl implements CommentService {
                             .dislike(reaction.getDislike())
                             .build())
                     .id(comment.getId())
+                    .reactionId(comment.getReactionId())
                     .parentid(comment.getParentId())
                     .content(comment.getContent())
                     .build();

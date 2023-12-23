@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.StringJoiner;
 import java.util.stream.Collectors;
 
@@ -143,21 +144,27 @@ public class PostServiceImpl implements PostService {
         return postList.stream().map(post -> {
             Reaction reaction = reactionService.getById(post.getReactionId());
             User user = userService.getUserById(post.getUserId());
-            List<String> tags;
+            List<Tag> tags;
             if (post.getTagsId() == null || "".equals(post.getTagsId())) {
             }
             tags = Arrays.stream(post.getTagsId().split(",")).map(String::trim).map(id -> {
                 Tag tag = tagService.getById(Long.getLong(id));
-                return tag.getName();
+                return tag;
             }).toList();
+            Map<Long,String> map = tags.stream()
+                    .collect(Collectors.toMap(
+                            Tag::getId,        // Key: original element
+                            Tag::getName     // Value: squared value
+                    ));
             return PostResponseDTO.builder()
                     .postId(post.getId())
                     .reactionDTO(ReactionDTO.builder()
                             .like(reaction.getLike())
                             .dislike(reaction.getDislike())
                             .build())
+                    .reactionId(post.getReactionId())
                     .userDTO(DataUtils.convertUserToUserDTO(user))
-                    .tagName(tags)
+                    .tagName(map)
                     .createTime(post.getCreateTime())
                     .title(post.getTitle())
                     .content(post.getContent())

@@ -7,6 +7,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 public class CommentResponseDTO {
     private Long id;
+    private Long reactionId;
     private UserInfoDTO userDTO;
     private Long parentid;
     private String content;

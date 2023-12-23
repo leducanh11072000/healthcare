@@ -12,6 +12,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+
 @RestApiV1
 @AllArgsConstructor
 @CrossOrigin(origins = "http://localhost:5173/account/register")
@@ -27,7 +29,7 @@ public class UserController {
         return  userService.register(registerUserDTO);
     }
     @PostMapping("/user/update-avatar")
-    DataResponse register(@RequestParam Long userId,@Valid @NotNull @RequestParam("file") MultipartFile multipartFile){
+    DataResponse register(@RequestParam Long userId,@Valid @NotNull @RequestParam("file") MultipartFile multipartFile) throws IOException {
         return  userService.updateAvatar(userId,multipartFile);
     }
 }
