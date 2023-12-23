@@ -16,8 +16,8 @@ public class HealthInfoController {
     @Autowired
     private final HealthInfoService healthInfoService;
 
-    @GetMapping("/health-info/")
-    DataResponse getByPostId(@RequestParam Long userId, @RequestBody HealthInfoDTO healthInfoDTO){
+    @PostMapping("/health-info/")
+    DataResponse inserHealthInfo(@RequestParam Long userId, @RequestBody HealthInfoDTO healthInfoDTO){
         return  healthInfoService.insertByUserId(userId,healthInfoDTO);
     }
 }

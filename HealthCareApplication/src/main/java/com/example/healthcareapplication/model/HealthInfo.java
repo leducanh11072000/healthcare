@@ -22,7 +22,7 @@ public class HealthInfo extends BaseEntity implements Serializable {
     @Column(name = "user_id")
     private Long userId;
     @Column(name = "value")
-    private Long value;
+    private Double value;
     @Column(name = "type")
-    private Long type; //1 la chieu cao // 2 la can nang // 3 là BMI// 4 la thoi gian tap luyen // 5 la thoi gian ngu
+    private Long type;
 }
