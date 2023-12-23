@@ -9,4 +9,6 @@ import java.io.IOException;
 @Service
 public interface UploadFileService {
     DataResponse uploadFile (MultipartFile file) throws IOException;
+
+    DataResponse getFile(String path) throws IOException;
 }
