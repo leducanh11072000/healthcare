@@ -27,11 +27,11 @@ public class Post extends BaseEntity implements Serializable {
     private Long userId;
 
     @Lob
-    @Column(name = "title")
+    @Column(columnDefinition = "TEXT",name = "title")
     private String title;
 
     @Lob
-    @Column(name = "content")
+    @Column(columnDefinition = "TEXT",name = "content")
     private String content;
 
     @Column(name = "reaction_id")

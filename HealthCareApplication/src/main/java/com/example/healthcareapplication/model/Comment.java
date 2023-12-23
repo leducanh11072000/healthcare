@@ -27,7 +27,7 @@ public class Comment extends BaseEntity implements Serializable {
     private Long userId;
 
     @Lob
-    @Column(name = "content")
+    @Column(columnDefinition = "TEXT",name = "content")
     private String content;
 
     @Column(name = "reaction_id")
