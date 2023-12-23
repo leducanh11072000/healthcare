@@ -26,9 +26,11 @@ public class Post extends BaseEntity implements Serializable {
     @Column(name = "user_id")
     private Long userId;
 
+    @Lob
     @Column(name = "title")
     private String title;
 
+    @Lob
     @Column(name = "content")
     private String content;
 

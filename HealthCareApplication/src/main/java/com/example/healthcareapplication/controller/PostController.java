@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestApiV1
+@CrossOrigin(origins = "*")
 public class PostController {
     @Autowired
     private PostService postService;

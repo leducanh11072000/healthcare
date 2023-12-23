@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestApiV1
 @AllArgsConstructor
+@CrossOrigin(origins = "*")
 public class CommentController {
     @Autowired
     private final CommentService commentService;

@@ -16,7 +16,7 @@ import java.io.IOException;
 
 @RestApiV1
 @AllArgsConstructor
-@CrossOrigin(origins = "http://localhost:5173/account/register")
+@CrossOrigin(origins = "*")
 public class UserController {
     private final UserService userService;
     @PostMapping("/user/login")
