@@ -85,6 +85,7 @@ public class PostServiceImpl implements PostService {
             Post post = Post.builder()
                     .status(Common.ACTIVE_STATUS)
                     .title(insertPostDTO.getTitle())
+                    .userId(insertPostDTO.getUserid())
                     .tagsId(listTagId)
                     .reactionId(reaction.getId())
                     .content(insertPostDTO.getContent())
