@@ -159,7 +159,7 @@ public class PostServiceImpl implements PostService {
             return new DataResponse(HttpStatus.BAD_REQUEST.value(),"Không tìm thấy thông tin bài viết",null);
         }
         List<PostResponseDTO> postResponseDTOS = convertFromPost(Collections.singletonList(post));
-        return new DataResponse(HttpStatus.OK.value(), Common.SUCCESS,post);
+        return new DataResponse(HttpStatus.OK.value(), Common.SUCCESS,postResponseDTOS);
     }
 
     private List<PostResponseDTO> convertFromPost(List<Post> postList) {
