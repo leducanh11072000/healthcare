@@ -112,7 +112,7 @@ public class HealthInfoServiceImpl implements HealthInfoService {
         try {
             List<HealthInfo> healthInfos = new ArrayList<>();
             for (Long i = 1L; i < 6L; i++) {
-                healthInfos.add(healthInfoRepository.findTopByCreateTimeDescAndUserIdAndAndType(userId, i));
+                healthInfos.add(healthInfoRepository.findTopByAndUserIdAndAndTypeOrderByCreateTimeDesc(userId, i));
             }
             return new DataResponse(HttpStatus.OK.value(), Common.SUCCESS, healthInfos);
         } catch (Exception e) {
