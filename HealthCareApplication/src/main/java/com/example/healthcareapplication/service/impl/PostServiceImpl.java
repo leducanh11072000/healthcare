@@ -172,7 +172,7 @@ public class PostServiceImpl implements PostService {
                     .createTime(post.getCreateTime())
                     .title(post.getTitle())
                     .content(post.getContent())
-                    .commentResponseDTOList(commentResponseDTOList)
+                    .countComment(commentResponseDTOList.stream().count())
                     .build();
         }).collect(Collectors.toList());
     }
