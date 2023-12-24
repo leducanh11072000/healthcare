@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -92,6 +93,7 @@ public class PostServiceImpl implements PostService {
                     .updateBy(insertPostDTO.getUserName())
                     .createBy(insertPostDTO.getUserName())
                     .watchTime(0L)
+                    .createTime(LocalDateTime.now())
                     .build();
             Post result = postRepository.save(post);
             return new DataResponse(HttpStatus.OK.value(), Common.SUCCESS,result);

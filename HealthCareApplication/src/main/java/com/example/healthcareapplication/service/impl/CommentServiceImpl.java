@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -53,6 +54,7 @@ public class CommentServiceImpl implements CommentService {
                     .postId(commentDTO.getPostId())
                     .userId(commentDTO.getUserId())
                     .reactionId(reaction.getId())
+                    .createTime(LocalDateTime.now())
                     .build();
             Comment result = commentRepository.save(comment);
             return new DataResponse(HttpStatus.OK.value(), Common.SUCCESS, result);
