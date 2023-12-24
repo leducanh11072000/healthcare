@@ -149,7 +149,7 @@ public class PostServiceImpl implements PostService {
             if (post.getTagsId() == null || "".equals(post.getTagsId())) {
             }
             tags = Arrays.stream(post.getTagsId().split(",")).map(String::trim).map(id -> {
-                Tag tag = tagService.getById(Long.getLong(id));
+                Tag tag = tagService.getById(Long.parseLong(id));
                 return tag;
             }).toList();
             Map<Long,String> map = tags.stream()
