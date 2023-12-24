@@ -107,4 +107,17 @@ public class HealthInfoServiceImpl implements HealthInfoService {
                 .collect(Collectors.toList());
         return new DataResponse(HttpStatus.OK.value(), Common.SUCCESS,healthInfoDTOS);
     }
+
+    @Override
+    public DataResponse getByUserId(Long userId) {
+        try {
+            List<HealthInfo> healthInfos = new ArrayList<>();
+            for (Long i = 1L; i < 6L; i++) {
+                healthInfos.add(healthInfoRepository.findByUserIdAndAndType(userId, i));
+            }
+            return new DataResponse(HttpStatus.OK.value(), Common.SUCCESS, healthInfos);
+        } catch (Exception e) {
+            return new DataResponse(HttpStatus.NOT_FOUND.value(), "Có lỗi xảy ra trong khi tìm kiếm thông tin", null);
+        }
+    }
 }

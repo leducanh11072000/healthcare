@@ -9,4 +9,6 @@ public interface HealthInfoService {
     DataResponse insertByUserId(Long userId, HealthInfoDTO healthInfoDTO);
     DataResponse findAvgInYear(Long userId,Long type);
     DataResponse findAvgInMonth(Long userId,Long type);
+
+    DataResponse getByUserId(Long userId);
 }

@@ -20,6 +20,10 @@ public class HealthInfoController {
     DataResponse inserHealthInfo(@RequestParam Long userId, @RequestBody HealthInfoDTO healthInfoDTO){
         return  healthInfoService.insertByUserId(userId,healthInfoDTO);
     }
+    @GetMapping("/health-info")
+    DataResponse getHealthInfo(@RequestParam Long userId){
+        return  healthInfoService.getByUserId(userId);
+    }
 
     @GetMapping("/health-info/month")
     DataResponse showAVGHealthInfoYear(@RequestParam Long userId, @RequestParam Long type){
