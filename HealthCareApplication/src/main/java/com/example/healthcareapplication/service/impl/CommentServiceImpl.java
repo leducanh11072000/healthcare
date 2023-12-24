@@ -120,6 +120,7 @@ public class CommentServiceImpl implements CommentService {
                     .reactionId(comment.getReactionId())
                     .parentid(comment.getParentId())
                     .content(comment.getContent())
+                    .createTime(comment.getCreateTime())
                     .build();
         }).collect(Collectors.toList());
     }
