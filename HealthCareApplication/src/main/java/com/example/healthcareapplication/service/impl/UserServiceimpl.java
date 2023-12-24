@@ -42,7 +42,7 @@ public class UserServiceimpl implements UserService {
                     .id(user.getId())
                     .tagName(user.getTagName())
                     .avatarAddress(user.getAvatarAddress())
-                    .email(user.getEmail())
+//                    .email(user.getEmail())
                     .username(user.getUserName())
                     .build());
         } else {

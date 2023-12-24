@@ -10,5 +10,5 @@ public class UserInfoDTO {
     private String username;
     private String avatarAddress;
     private String tagName;
-    private String email;
+//    private String email;
 }
