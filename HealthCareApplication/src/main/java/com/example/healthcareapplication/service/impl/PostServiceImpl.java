@@ -4,10 +4,7 @@ import com.example.healthcareapplication.Utils.DataUtils;
 import com.example.healthcareapplication.model.*;
 import com.example.healthcareapplication.model.dto.*;
 import com.example.healthcareapplication.repository.PostRepository;
-import com.example.healthcareapplication.service.PostService;
-import com.example.healthcareapplication.service.ReactionService;
-import com.example.healthcareapplication.service.TagService;
-import com.example.healthcareapplication.service.UserService;
+import com.example.healthcareapplication.service.*;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +30,8 @@ public class PostServiceImpl implements PostService {
     private final ReactionService reactionService;
     @Autowired
     private final UserService userService;
+    @Autowired
+    private final CommentService commentService;
     @Override
     public DataResponse getAllByUserId(Long userId, Long pageNo, Long pageSize) {
         try {
@@ -159,6 +158,7 @@ public class PostServiceImpl implements PostService {
                             Tag::getId,        // Key: original element
                             Tag::getName     // Value: squared value
                     ));
+            List<CommentResponseDTO> commentResponseDTOList = commentService.getByPostIdInside(post.getId());
             return PostResponseDTO.builder()
                     .postId(post.getId())
                     .reactionDTO(ReactionDTO.builder()
@@ -172,6 +172,7 @@ public class PostServiceImpl implements PostService {
                     .createTime(post.getCreateTime())
                     .title(post.getTitle())
                     .content(post.getContent())
+                    .commentResponseDTOList(commentResponseDTOList)
                     .build();
         }).collect(Collectors.toList());
     }

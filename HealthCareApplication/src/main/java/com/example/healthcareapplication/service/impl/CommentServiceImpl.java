@@ -97,6 +97,14 @@ public class CommentServiceImpl implements CommentService {
             return new DataResponse(HttpStatus.BAD_REQUEST.value(),e.getMessage(),null);
         }
     }
+
+    @Override
+    public List<CommentResponseDTO> getByPostIdInside(Long postId) {
+        List<Comment> comments = commentRepository.getAllByPostIdAndStatus(postId, Common.ACTIVE_STATUS);
+        List<CommentResponseDTO> commentResponseDTOList = convertFromComment(comments);
+        return commentResponseDTOList;
+    }
+
     private List<CommentResponseDTO> convertFromComment(List<Comment> comments) {
         return comments.stream().map(comment -> {
             Reaction reaction = reactionService.getById(comment.getReactionId());

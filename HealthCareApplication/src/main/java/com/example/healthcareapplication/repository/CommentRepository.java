@@ -10,4 +10,5 @@ import java.util.List;
 @Repository
 public interface CommentRepository  extends JpaRepository<Comment, Long> {
     List<Comment> getAllByPostIdAndStatus(Long postId, Long status, Pageable pageable);
+    List<Comment> getAllByPostIdAndStatus(Long postId, Long status);
 }

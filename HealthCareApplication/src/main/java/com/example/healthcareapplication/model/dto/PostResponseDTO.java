@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Map;
 
 @Data
@@ -17,4 +18,5 @@ public class PostResponseDTO {
     private String content;
     private ReactionDTO reactionDTO;
     private Map<Long,String> tagName;
+    List<CommentResponseDTO> commentResponseDTOList;
 }
