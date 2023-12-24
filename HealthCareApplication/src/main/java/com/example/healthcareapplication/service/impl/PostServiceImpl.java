@@ -12,10 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.StringJoiner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -161,6 +158,7 @@ public class PostServiceImpl implements PostService {
             log.error("Không tìm thấy thông tin bài viết ");
             return new DataResponse(HttpStatus.BAD_REQUEST.value(),"Không tìm thấy thông tin bài viết",null);
         }
+        List<PostResponseDTO> postResponseDTOS = convertFromPost(Collections.singletonList(post));
         return new DataResponse(HttpStatus.OK.value(), Common.SUCCESS,post);
     }
 
