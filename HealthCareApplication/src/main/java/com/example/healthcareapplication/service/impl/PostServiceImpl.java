@@ -47,7 +47,7 @@ public class PostServiceImpl implements PostService {
     @Override
     public DataResponse getSome(Long pageNo, Long pageSize) {
         try {
-            List<Post> postList = postRepository.findAll(DataUtils.getPageable(pageNo, pageSize)).stream().filter(post -> Common.ACTIVE_STATUS.equals(post.getStatus())).toList();
+            List<Post> postList = postRepository.findAll(DataUtils.getPageable(pageNo, pageSize)).stream().filter(post -> Common.ACTIVE_STATUS.equals(post.getStatus()) && post.getUserId()!=null).toList();
             List<PostResponseDTO> postResponseDTOS = convertFromPost(postList);
             return new DataResponse(HttpStatus.OK.value(), Common.SUCCESS,postResponseDTOS);
         }catch (Exception e) {
