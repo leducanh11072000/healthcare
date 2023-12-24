@@ -78,6 +78,7 @@ public class PostServiceImpl implements PostService {
             Reaction reaction = reactionService.save(Reaction.builder()
                     .like(0L)
                     .dislike(0L)
+                    .isPost(true)
                     .build());
             Post post = Post.builder()
                     .status(Common.ACTIVE_STATUS)

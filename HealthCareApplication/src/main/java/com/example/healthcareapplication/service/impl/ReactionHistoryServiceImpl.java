@@ -35,7 +35,7 @@ public class ReactionHistoryServiceImpl  implements ReactionHistoryService {
     }
 
     @Override
-    public DataResponse createHistory(Long userId, Long entityId,Long reactionId, Boolean isLike) {
+    public DataResponse createHistory(Long userId, Long entityId,Long reactionId, Boolean isLike, Boolean isPost) {
         try {
             List<ReactionHistory> reactionHistories = reactionHistoryRepository.findAllByUserIdAndStatus(userId,Common.ACTIVE_STATUS);
             ReactionHistory reactionHistory = reactionHistories.stream().filter(e -> e.getEntityReactionId().equals(entityId)).findFirst().orElse(null);
@@ -74,6 +74,7 @@ public class ReactionHistoryServiceImpl  implements ReactionHistoryService {
                     .userId(userId)
                     .reactionId(reaction.getId())
                     .isLike(isLike)
+                    .isPost(isPost)
                     .build();
             return new DataResponse(HttpStatus.OK.value(), Common.SUCCESS, reactionHistoryRepository.save(newHistory));
         } catch (Exception e) {

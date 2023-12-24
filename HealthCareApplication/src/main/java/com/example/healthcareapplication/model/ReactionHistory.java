@@ -24,6 +24,8 @@ public class ReactionHistory {
     private Long reactionId;
     @Column(name = "entity_reaction")
     private Long entityReactionId;
+    @Column(name = "is_post")
+    private Boolean isPost;
     @Column(name = "is_like")
     private Boolean isLike;
     @Column(name = "status")

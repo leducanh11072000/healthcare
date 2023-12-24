@@ -22,5 +22,7 @@ public class Reaction implements Serializable {
 
     @Column(name = "dis_like")
     private Long dislike;
+    @Column(name = "is_post")
+    private Boolean isPost;
 
 }

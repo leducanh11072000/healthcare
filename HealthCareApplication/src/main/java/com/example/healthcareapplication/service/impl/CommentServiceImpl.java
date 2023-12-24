@@ -46,7 +46,7 @@ public class CommentServiceImpl implements CommentService {
         try {
             Reaction reaction = reactionService.save(Reaction.builder()
                     .dislike(0L)
-                    .like(0L)
+                    .like(0L).isPost(false)
                     .build());
             Comment comment = Comment.builder()
                     .content(commentDTO.getContent())

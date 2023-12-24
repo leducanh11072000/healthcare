@@ -7,5 +7,5 @@ import org.springframework.stereotype.Service;
 public interface ReactionHistoryService {
 
     DataResponse getReactionHistoryByUserId(Long userId);
-    DataResponse createHistory(Long userId,Long entityId,Long reactionId,Boolean isLike);
+    DataResponse createHistory(Long userId,Long entityId,Long reactionId,Boolean isLike,Boolean isPost);
 }
