@@ -190,7 +190,6 @@ public class PostServiceImpl implements PostService {
                     .reactionId(post.getReactionId())
                     .userDTO(DataUtils.convertUserToUserDTO(user))
                     .tagName(map)
-                    .postId(post.getUserId())
                     .createTime(post.getCreateTime())
                     .title(post.getTitle())
                     .content(post.getContent())
