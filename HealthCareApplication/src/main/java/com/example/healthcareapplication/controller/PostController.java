@@ -47,4 +47,8 @@ public class PostController {
     DataResponse updatePost(@RequestBody DeletePostDTO deletePostDTO) {
         return postService.deletePost(deletePostDTO);
     }
+    @PostMapping("/post/increase-look-time")
+    DataResponse increase(@RequestParam Long postId) {
+        return postService.increaseWatchTime(postId);
+    }
 }

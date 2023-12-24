@@ -20,4 +20,6 @@ public interface PostService {
     DataResponse updatePost(UpdatePostDTO updatePostDTO);
 
     DataResponse deletePost(DeletePostDTO deletePostDTO);
+
+    DataResponse increaseWatchTime(Long postId);
 }

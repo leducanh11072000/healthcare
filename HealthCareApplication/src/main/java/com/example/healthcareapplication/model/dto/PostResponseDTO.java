@@ -19,4 +19,5 @@ public class PostResponseDTO {
     private ReactionDTO reactionDTO;
     private Map<Long,String> tagName;
     private Long countComment;
+    private Long watchTime;
 }
