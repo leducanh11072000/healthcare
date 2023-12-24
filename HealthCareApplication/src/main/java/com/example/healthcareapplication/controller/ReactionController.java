@@ -22,4 +22,9 @@ public class ReactionController {
     DataResponse getUserReactionHistory (@Valid @NotNull @Positive @PathVariable Long userId){
         return reactionHistoryService.getReactionHistoryByUserId(userId);
     }
+
+    @PostMapping("/reaction/")
+    DataResponse reactionPost (@Valid @NotNull @Positive @RequestParam("userId") Long userId,@Valid @NotNull @Positive @RequestParam("entityId") Long entityId,@Valid @NotNull @Positive @RequestParam("reactionId") Long reactionId,@Valid @NotNull @RequestParam("isLike") Boolean isLike){
+        return reactionHistoryService.createHistory(userId,entityId,reactionId,isLike);
+    }
 }

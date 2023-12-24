@@ -15,4 +15,5 @@ public class CommentResponseDTO {
     private String content;
     private ReactionDTO reactionDTO;
     private LocalDateTime createTime;
+    private Long postId;
 }
