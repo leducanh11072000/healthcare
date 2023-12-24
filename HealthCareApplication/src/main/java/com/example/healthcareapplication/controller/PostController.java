@@ -24,7 +24,7 @@ public class PostController {
         return postService.getAllByUserId(userId,pageNo,pageSize);
     };
     @GetMapping("/post")
-    DataResponse getSome(@RequestParam @Positive Long pageNo, @RequestParam @Positive Long pageSize){
+    DataResponse getSome(@RequestParam Long pageNo, @RequestParam @Positive Long pageSize){
         return postService.getSome(pageNo,pageSize);
     }
 
