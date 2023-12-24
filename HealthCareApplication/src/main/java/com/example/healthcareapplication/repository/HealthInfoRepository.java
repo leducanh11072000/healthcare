@@ -17,6 +17,6 @@ public interface HealthInfoRepository   extends JpaRepository<HealthInfo, Long> 
 
     @Query(value = "SELECT AVG(e.value) FROM health_info e WHERE e.user_id = ?1 AND e.type = ?2 WHERE YEARWEEK(e.create_time) = YEARWEEK(?3);" , nativeQuery = true)
     Double findAvgInWeekByUserIdAndTypeAndCreateTime(Long userId,Long type, LocalDateTime date);
-    HealthInfo findByUserIdAndAndType(Long userId,Long type);
+    HealthInfo findTopByCreateTimeDescAndUserIdAndAndType(Long userId, Long type);
 
 }

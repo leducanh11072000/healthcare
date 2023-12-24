@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -113,7 +112,7 @@ public class HealthInfoServiceImpl implements HealthInfoService {
         try {
             List<HealthInfo> healthInfos = new ArrayList<>();
             for (Long i = 1L; i < 6L; i++) {
-                healthInfos.add(healthInfoRepository.findByUserIdAndAndType(userId, i));
+                healthInfos.add(healthInfoRepository.findTopByCreateTimeDescAndUserIdAndAndType(userId, i));
             }
             return new DataResponse(HttpStatus.OK.value(), Common.SUCCESS, healthInfos);
         } catch (Exception e) {
