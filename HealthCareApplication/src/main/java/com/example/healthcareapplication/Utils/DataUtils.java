@@ -16,6 +16,7 @@ public class DataUtils {
                 .avatarAddress(user.getAvatarAddress())
                 .id(user.getId())
                 .tagName(user.getTagName())
+                .username(user.getUserName())
                 .build();
     }
 }
