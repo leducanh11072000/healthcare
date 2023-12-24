@@ -53,6 +53,7 @@ public class CommentServiceImpl implements CommentService {
                     .parentId(commentDTO.getParentId())
                     .postId(commentDTO.getPostId())
                     .userId(commentDTO.getUserId())
+                    .status(Common.ACTIVE_STATUS)
                     .reactionId(reaction.getId())
                     .createTime(LocalDateTime.now())
                     .build();
