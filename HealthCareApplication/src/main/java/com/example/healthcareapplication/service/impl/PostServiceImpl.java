@@ -74,7 +74,7 @@ public class PostServiceImpl implements PostService {
                         }
                         stringJoiner.add(tag.getId().toString());
                         return tag;
-                    });
+                    }).toList();
                 }
             }
             String listTagId = stringJoiner.toString();
