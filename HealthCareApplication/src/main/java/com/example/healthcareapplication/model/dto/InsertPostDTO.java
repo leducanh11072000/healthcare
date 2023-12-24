@@ -2,11 +2,9 @@ package com.example.healthcareapplication.model.dto;
 
 import lombok.Data;
 
-import java.util.List;
-
 @Data
 public class InsertPostDTO {
-    private Long userid;
+    private Long userId;
     private String userName;
     private String title;
     private String tags;
