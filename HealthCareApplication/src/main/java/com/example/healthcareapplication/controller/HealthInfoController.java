@@ -16,8 +16,20 @@ public class HealthInfoController {
     @Autowired
     private final HealthInfoService healthInfoService;
 
-    @PostMapping("/health-info/")
+    @PostMapping("/health-info")
     DataResponse inserHealthInfo(@RequestParam Long userId, @RequestBody HealthInfoDTO healthInfoDTO){
         return  healthInfoService.insertByUserId(userId,healthInfoDTO);
     }
+
+    @GetMapping("/health-info/month")
+    DataResponse showAVGHealthInfoYear(@RequestParam Long userId, @RequestParam Long type){
+        return  healthInfoService.findAvgInYear(userId,type);
+    }
+
+    @GetMapping("/health-info/weak")
+    DataResponse showAVGHealthInfoWeak(@RequestParam Long userId, @RequestParam Long type){
+        return  healthInfoService.findAvgInMonth(userId,type);
+    }
+
+
 }
