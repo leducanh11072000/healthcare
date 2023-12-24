@@ -22,4 +22,6 @@ public interface PostService {
     DataResponse deletePost(DeletePostDTO deletePostDTO);
 
     DataResponse increaseWatchTime(Long postId);
+
+    DataResponse getPostById(Long postId);
 }

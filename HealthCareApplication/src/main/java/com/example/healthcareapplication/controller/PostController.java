@@ -27,7 +27,10 @@ public class PostController {
     DataResponse getSome(@RequestParam Long pageNo, @RequestParam @Positive Long pageSize){
         return postService.getSome(pageNo,pageSize);
     }
-
+    @GetMapping("/post/{postId}")
+    DataResponse getByPostId(@PathVariable Long postId){
+        return postService.getPostById(postId);
+    }
     @PostMapping("/post")
     DataResponse insertPost(@RequestBody InsertPostDTO insertPostDTO) {
         return postService.insertPost(insertPostDTO);

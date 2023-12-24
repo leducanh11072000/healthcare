@@ -154,6 +154,16 @@ public class PostServiceImpl implements PostService {
         return new DataResponse(HttpStatus.OK.value(), Common.SUCCESS,post);
     }
 
+    @Override
+    public DataResponse getPostById(Long postId) {
+        Post post = postRepository.getPostByIdAndStatus(postId,Common.ACTIVE_STATUS);
+        if (post == null ) {
+            log.error("Không tìm thấy thông tin bài viết ");
+            return new DataResponse(HttpStatus.BAD_REQUEST.value(),"Không tìm thấy thông tin bài viết",null);
+        }
+        return new DataResponse(HttpStatus.OK.value(), Common.SUCCESS,post);
+    }
+
     private List<PostResponseDTO> convertFromPost(List<Post> postList) {
         return postList.stream().map(post -> {
             Reaction reaction = reactionService.getById(post.getReactionId());
