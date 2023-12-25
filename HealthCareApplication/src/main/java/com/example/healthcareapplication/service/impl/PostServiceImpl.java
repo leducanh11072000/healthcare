@@ -56,25 +56,22 @@ public class PostServiceImpl implements PostService {
     @Override
     public DataResponse insertPost(InsertPostDTO insertPostDTO) {
         try {
-            StringJoiner stringJoiner = new StringJoiner(", ");
+            String listTagId =null;
             if (insertPostDTO.getTags() != null) {
-                List<String> listTagNameBeforeValidate = Arrays.stream(insertPostDTO.getTags().split(",")).toList();
-                if (listTagNameBeforeValidate != null) {
-
-                    listTagNameBeforeValidate.stream().map(e -> {
-                        Tag tag;
-                        if (tagService.isExist(e)) {
-                            tag = tagService.getByName(e);
-                            stringJoiner.add(tag.getId().toString());
-                        } else {
-                            tag = tagService.save(Tag.builder().name(e).build());
-                        }
-                        stringJoiner.add(tag.getId().toString());
-                        return tag;
-                    }).toList();
-                }
+                StringJoiner stringJoiner = new StringJoiner(",");
+                List<String> listTagNameBeforeValidate = Arrays.stream(insertPostDTO.getTags().trim().split(",")).filter(""::equals).toList();
+                listTagNameBeforeValidate.stream().map(e -> {
+                    Tag tag;
+                    if (tagService.isExist(e)) {
+                        tag = tagService.getByName(e);
+                    } else {
+                        tag = tagService.save(Tag.builder().name(e).build());
+                    }
+                    stringJoiner.add(tag.getId().toString());
+                    return tag;
+                }).toList();
+                listTagId = stringJoiner.toString();
             }
-            String listTagId = stringJoiner.toString();
             Reaction reaction = reactionService.save(Reaction.builder()
                     .like(0L)
                     .dislike(0L)
