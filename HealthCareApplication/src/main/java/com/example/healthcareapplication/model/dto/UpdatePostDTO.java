@@ -4,7 +4,6 @@ import lombok.Data;
 import lombok.experimental.SuperBuilder;
 
 @Data
-@SuperBuilder
 public class UpdatePostDTO {
     private Long userId;
     private Long postId;

@@ -69,7 +69,7 @@ public class CommentServiceImpl implements CommentService {
     public DataResponse updateComment(CommentDTO commentDTO) {
         try {
             Comment comment = commentRepository.findById(commentDTO.getId()).orElse(null);
-            if (comment == null || comment.getUserId().equals(commentDTO.getUserId())) {
+            if (comment == null || !comment.getUserId().equals(commentDTO.getUserId())) {
                 log.error("Không tìm thấy thông tin bình luận hoặc người dùng không có quyền sửa");
                 return new DataResponse(HttpStatus.NOT_FOUND.value(),"Không tìm thấy thông tin bình luận hoặc người dùng không có quyền sửa",null);
             }
@@ -86,7 +86,7 @@ public class CommentServiceImpl implements CommentService {
     public DataResponse deleteComment(CommentDTO commentDTO) {
         try {
             Comment comment = commentRepository.findById(commentDTO.getId()).orElse(null);
-            if (comment == null || comment.getUserId().equals(commentDTO.getUserId())) {
+            if (comment == null || !comment.getUserId().equals(commentDTO.getUserId())) {
                 log.error("Không tìm thấy thông tin bình luận hoặc người dùng không có quyền xóa");
                 return new DataResponse(HttpStatus.NOT_FOUND.value(), "Không tìm thấy thông tin bình luận hoặc người dùng không có quyền xóa",null);
             }
