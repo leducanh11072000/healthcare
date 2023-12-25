@@ -118,7 +118,7 @@ public class PostServiceImpl implements PostService {
     @Override
     public DataResponse updatePost(UpdatePostDTO updatePostDTO) {
         Post post = postRepository.getPostByIdAndStatus(updatePostDTO.getPostId(),Common.ACTIVE_STATUS);
-        if (post == null || post.getUserId().equals(updatePostDTO.getUserId())) {
+        if (post == null || !post.getUserId().equals(updatePostDTO.getUserId())) {
             log.error("Không tìm thấy thông tin bài viết hoặc người dùng không có quyền sửa");
             return new DataResponse(HttpStatus.BAD_REQUEST.value(),"Không tìm thấy thông tin bài viết hoặc người dùng không có quyền sửa",null);
         }
@@ -131,7 +131,7 @@ public class PostServiceImpl implements PostService {
     @Override
     public DataResponse deletePost(DeletePostDTO deletePostDTO) {
         Post post = postRepository.getPostByIdAndStatus(deletePostDTO.getPostId(),Common.ACTIVE_STATUS);
-        if (post == null || post.getUserId().equals(deletePostDTO.getUserId())) {
+        if (post == null || !post.getUserId().equals(deletePostDTO.getUserId())) {
             log.error("Không tìm thấy thông tin bài viết hoặc người dùng không có quyền xóa");
             return new DataResponse(HttpStatus.NOT_FOUND.value(), "Không tìm thấy thông tin bài viết hoặc người dùng không có quyền xóa",null);
         }
