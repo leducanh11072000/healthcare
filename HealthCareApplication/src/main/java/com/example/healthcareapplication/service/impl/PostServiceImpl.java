@@ -164,18 +164,21 @@ public class PostServiceImpl implements PostService {
         return postList.stream().map(post -> {
             Reaction reaction = reactionService.getById(post.getReactionId());
             User user = userService.getUserById(post.getUserId());
-            List<Tag> tags;
-            if (post.getTagsId() == null || "".equals(post.getTagsId())) {
+            List<Tag> tags = null;
+            if (post.getTagsId() != null && !"".equals(post.getTagsId())) {
+                tags = Arrays.stream(post.getTagsId().split(",")).map(String::trim).map(id -> {
+                    Tag tag = tagService.getById(Long.parseLong(id));
+                    return tag;
+                }).toList();
             }
-            tags = Arrays.stream(post.getTagsId().split(",")).map(String::trim).map(id -> {
-                Tag tag = tagService.getById(Long.parseLong(id));
-                return tag;
-            }).toList();
-            Map<Long,String> map = tags.stream()
+            Map<Long, String> map = null;
+            if (tags != null) {
+             map = tags.stream()
                     .collect(Collectors.toMap(
                             Tag::getId,        // Key: original element
                             Tag::getName     // Value: squared value
                     ));
+            }
             List<CommentResponseDTO> commentResponseDTOList = commentService.getByPostIdInside(post.getId());
             return PostResponseDTO.builder()
                     .postId(post.getId())
