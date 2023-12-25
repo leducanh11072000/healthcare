@@ -43,7 +43,7 @@ public class HealthInfoServiceImpl implements HealthInfoService {
                 .createTime(now)
                 .status(Common.ACTIVE_STATUS)
                 .build();
-        Double bmiValue = (((healthInfoDTO.getHeight()* 10000.0) / (healthInfoDTO.getWeight() * healthInfoDTO.getWeight())) ) ;
+        Double bmiValue = (((healthInfoDTO.getWeight()* 10000.0) / (healthInfoDTO.getHeight() * healthInfoDTO.getHeight())) ) ;
         HealthInfo bmi =  HealthInfo.builder()
                 .value(bmiValue)
                 .type(Common.HEALTH_INFO.BMI)
