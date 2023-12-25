@@ -27,6 +27,10 @@ public class PostController {
     DataResponse getSome(@RequestParam Long pageNo, @RequestParam @Positive Long pageSize){
         return postService.getSome(pageNo,pageSize);
     }
+    @GetMapping("/post/search")
+    DataResponse findByKeyword(@RequestParam String keyword,@RequestParam Long pageNo, @RequestParam @Positive Long pageSize){
+        return postService.findByKeyword(keyword,pageNo,pageSize);
+    }
     @GetMapping("/post/{postId}")
     DataResponse getByPostId(@PathVariable Long postId){
         return postService.getPostById(postId);

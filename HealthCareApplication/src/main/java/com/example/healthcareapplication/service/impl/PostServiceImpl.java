@@ -160,6 +160,18 @@ public class PostServiceImpl implements PostService {
         return new DataResponse(HttpStatus.OK.value(), Common.SUCCESS,postResponseDTOS);
     }
 
+    @Override
+    public DataResponse findByKeyword(String keyword, Long pageNo, Long pageSize) {
+        try {
+            List<Post> postList = postRepository.findByTitleContainingAndStatus(keyword.trim(),Common.ACTIVE_STATUS,DataUtils.getPageable(pageNo, pageSize)).stream().filter(post -> Common.ACTIVE_STATUS.equals(post.getStatus()) && post.getUserId()!=null).toList();
+            List<PostResponseDTO> postResponseDTOS = convertFromPost(postList);
+            return new DataResponse(HttpStatus.OK.value(), Common.SUCCESS,postResponseDTOS);
+        }catch (Exception e) {
+            log.error(e.getMessage(),e);
+            return new DataResponse(HttpStatus.BAD_REQUEST.value(),e.getMessage(),null);
+        }
+    }
+
     private List<PostResponseDTO> convertFromPost(List<Post> postList) {
         return postList.stream().map(post -> {
             Reaction reaction = reactionService.getById(post.getReactionId());

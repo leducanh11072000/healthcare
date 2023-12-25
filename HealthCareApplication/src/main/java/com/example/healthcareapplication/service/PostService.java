@@ -24,4 +24,6 @@ public interface PostService {
     DataResponse increaseWatchTime(Long postId);
 
     DataResponse getPostById(Long postId);
+
+    DataResponse findByKeyword(String keyword, Long pageNo, Long pageSize);
 }
