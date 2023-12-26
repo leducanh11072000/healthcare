@@ -24,11 +24,11 @@ public class PostController {
         return postService.getAllByUserId(userId,pageNo,pageSize);
     };
     @GetMapping("/post")
-    DataResponse getSome(@RequestParam Long pageNo, @RequestParam @Positive Long pageSize){
+    DataResponse getSome(@RequestParam Long pageNo, @RequestParam  Long pageSize){
         return postService.getSome(pageNo,pageSize);
     }
     @GetMapping("/post/search")
-    DataResponse findByKeyword(@RequestParam String keyword,@RequestParam Long pageNo, @RequestParam @Positive Long pageSize){
+    DataResponse findByKeyword(@RequestParam String keyword,@RequestParam Long pageNo, @RequestParam Long pageSize){
         return postService.findByKeyword(keyword,pageNo,pageSize);
     }
     @GetMapping("/post/{postId}")
