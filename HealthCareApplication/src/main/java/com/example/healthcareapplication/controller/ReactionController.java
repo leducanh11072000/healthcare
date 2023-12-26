@@ -24,11 +24,11 @@ public class ReactionController {
     }
 
     @PostMapping("/reaction/")
-    DataResponse reactionPost (@Valid @NotNull  @RequestParam() Long userId,
-                               @Valid @NotNull  @RequestParam() Long entityId,
-                               @Valid @NotNull  @RequestParam() Long reactionId,
-                               @Valid @NotNull @RequestParam() Boolean isLike,
-                               @Valid @NotNull @RequestParam() Boolean isPost){
+    DataResponse reactionPost (@Valid @NotNull  @RequestParam Long userId,
+                               @Valid @NotNull  @RequestParam Long entityId,
+                               @Valid @NotNull  @RequestParam Long reactionId,
+                               @Valid @NotNull @RequestParam Boolean isLike,
+                               @Valid @NotNull @RequestParam Boolean isPost){
         return reactionHistoryService.createHistory(userId,entityId,reactionId,isLike,isPost);
     }
 }
