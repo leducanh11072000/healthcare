@@ -1,6 +1,7 @@
 package com.example.healthcareapplication.controller;
 
 import com.example.healthcareapplication.customAnnotation.RestApiV1;
+import com.example.healthcareapplication.model.dto.CreateReactionDTO;
 import com.example.healthcareapplication.model.dto.DataResponse;
 import com.example.healthcareapplication.service.ReactionHistoryService;
 import com.example.healthcareapplication.service.ReactionService;
@@ -24,11 +25,7 @@ public class ReactionController {
     }
 
     @PostMapping("/reaction/")
-    DataResponse reactionPost (@RequestParam Long userId,
-                               @RequestParam Long entityId,
-                               @RequestParam Long reactionId,
-                               @RequestParam Boolean isLike,
-                               @RequestParam Boolean isPost){
-        return reactionHistoryService.createHistory(userId,entityId,reactionId,isLike,isPost);
+    DataResponse reactionPost (@RequestBody CreateReactionDTO createReactionDTO){
+        return reactionHistoryService.createHistory(createReactionDTO);
     }
 }

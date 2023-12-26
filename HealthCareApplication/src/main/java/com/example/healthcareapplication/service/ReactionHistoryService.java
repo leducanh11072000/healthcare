@@ -1,5 +1,6 @@
 package com.example.healthcareapplication.service;
 
+import com.example.healthcareapplication.model.dto.CreateReactionDTO;
 import com.example.healthcareapplication.model.dto.DataResponse;
 import org.springframework.stereotype.Service;
 
@@ -7,5 +8,5 @@ import org.springframework.stereotype.Service;
 public interface ReactionHistoryService {
 
     DataResponse getReactionHistoryByUserId(Long userId);
-    DataResponse createHistory(Long userId,Long entityId,Long reactionId,Boolean isLike,Boolean isPost);
+    DataResponse createHistory(CreateReactionDTO createReactionDTO);
 }

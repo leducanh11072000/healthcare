@@ -3,6 +3,7 @@ package com.example.healthcareapplication.service.impl;
 import com.example.healthcareapplication.model.Common;
 import com.example.healthcareapplication.model.Reaction;
 import com.example.healthcareapplication.model.ReactionHistory;
+import com.example.healthcareapplication.model.dto.CreateReactionDTO;
 import com.example.healthcareapplication.model.dto.DataResponse;
 import com.example.healthcareapplication.repository.ReactionHistoryRepository;
 import com.example.healthcareapplication.repository.ReactionRepository;
@@ -35,15 +36,15 @@ public class ReactionHistoryServiceImpl  implements ReactionHistoryService {
     }
 
     @Override
-    public DataResponse createHistory(Long userId, Long entityId,Long reactionId, Boolean isLike, Boolean isPost) {
+    public DataResponse createHistory(CreateReactionDTO createReactionDTO) {
         try {
-            List<ReactionHistory> reactionHistories = reactionHistoryRepository.findAllByUserIdAndStatus(userId,Common.ACTIVE_STATUS);
-            ReactionHistory reactionHistory = reactionHistories.stream().filter(e -> e.getEntityReactionId().equals(entityId)).findFirst().orElse(null);
-            Reaction reaction = reactionRepository.findById(reactionId).orElse(null);
+            List<ReactionHistory> reactionHistories = reactionHistoryRepository.findAllByUserIdAndStatus(createReactionDTO.getUserId(),Common.ACTIVE_STATUS);
+            ReactionHistory reactionHistory = reactionHistories.stream().filter(e -> e.getEntityReactionId().equals(createReactionDTO.getEntityId())).findFirst().orElse(null);
+            Reaction reaction = reactionRepository.findById(createReactionDTO.getReactionId()).orElse(null);
             if ( reactionHistory != null) {
-                if (reactionHistory.getIsLike() == isLike) {
+                if (reactionHistory.getIsLike() == createReactionDTO.getIsLike()) {
                     reactionHistory.setStatus(0L);
-                    if (isLike) {
+                    if (createReactionDTO.getIsLike()) {
                         reaction.setLike(reaction.getLike()-1);
                     } else {
                         reaction.setDislike(reaction.getDislike()-1);
@@ -51,8 +52,8 @@ public class ReactionHistoryServiceImpl  implements ReactionHistoryService {
                     reactionRepository.save(reaction);
                     return new DataResponse(HttpStatus.OK.value(), Common.SUCCESS, reactionHistoryRepository.save(reactionHistory));
                 }
-                reactionHistory.setIsLike(isLike);
-                if (isLike) {
+                reactionHistory.setIsLike(createReactionDTO.getIsLike());
+                if (createReactionDTO.getIsLike()) {
                     reaction.setLike(reaction.getLike()+1);
                     reaction.setDislike(reaction.getDislike()-1);
                 } else {
@@ -62,7 +63,7 @@ public class ReactionHistoryServiceImpl  implements ReactionHistoryService {
                 reactionRepository.save(reaction);
                 return new DataResponse(HttpStatus.OK.value(), Common.SUCCESS,  reactionHistoryRepository.save(reactionHistory));
             }
-            if (isLike) {
+            if (createReactionDTO.getIsLike()) {
                 reaction.setLike(reaction.getLike()+1);
             } else {
                 reaction.setDislike(reaction.getDislike()-1);
@@ -70,11 +71,11 @@ public class ReactionHistoryServiceImpl  implements ReactionHistoryService {
             reactionRepository.save(reaction);
             ReactionHistory newHistory = ReactionHistory.builder()
                     .status(Common.ACTIVE_STATUS)
-                    .entityReactionId(entityId)
-                    .userId(userId)
+                    .entityReactionId(createReactionDTO.getEntityId())
+                    .userId(createReactionDTO.getUserId())
                     .reactionId(reaction.getId())
-                    .isLike(isLike)
-                    .isPost(isPost)
+                    .isLike(createReactionDTO.getIsLike())
+                    .isPost(createReactionDTO.getIsPost())
                     .build();
             return new DataResponse(HttpStatus.OK.value(), Common.SUCCESS, reactionHistoryRepository.save(newHistory));
         } catch (Exception e) {
