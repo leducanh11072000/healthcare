@@ -4,7 +4,6 @@ import com.example.healthcareapplication.Utils.DataUtils;
 import com.example.healthcareapplication.model.*;
 import com.example.healthcareapplication.model.dto.*;
 import com.example.healthcareapplication.repository.CommentRepository;
-import com.example.healthcareapplication.repository.ReactionRepository;
 import com.example.healthcareapplication.service.CommentService;
 import com.example.healthcareapplication.service.ReactionService;
 import com.example.healthcareapplication.service.UserService;
@@ -119,7 +118,7 @@ public class CommentServiceImpl implements CommentService {
                     .id(comment.getId())
                     .postId(comment.getPostId())
                     .reactionId(comment.getReactionId())
-                    .parentid(comment.getParentId())
+                    .parentId(comment.getParentId())
                     .content(comment.getContent())
                     .createTime(comment.getCreateTime())
                     .build();

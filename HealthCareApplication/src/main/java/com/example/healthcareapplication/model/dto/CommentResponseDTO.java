@@ -11,7 +11,7 @@ public class CommentResponseDTO {
     private Long id;
     private Long reactionId;
     private UserInfoDTO userDTO;
-    private Long parentid;
+    private Long parentId;
     private String content;
     private ReactionDTO reactionDTO;
     private LocalDateTime createTime;
