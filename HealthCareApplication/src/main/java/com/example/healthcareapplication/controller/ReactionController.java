@@ -24,7 +24,7 @@ public class ReactionController {
         return reactionHistoryService.getReactionHistoryByUserId(userId);
     }
 
-    @PostMapping("/reaction/")
+    @PostMapping("/reaction")
     DataResponse reactionPost (@RequestBody CreateReactionDTO createReactionDTO){
         return reactionHistoryService.createHistory(createReactionDTO);
     }
