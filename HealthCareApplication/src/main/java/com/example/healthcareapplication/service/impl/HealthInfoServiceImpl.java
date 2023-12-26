@@ -16,8 +16,10 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDateTime;
+import java.time.temporal.WeekFields;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -98,7 +100,7 @@ public class HealthInfoServiceImpl implements HealthInfoService {
         List<HealthInfoResponseDTO> healthInfoDTOS = new ArrayList<>();
         for (int i =0; i<8;i++) {
             Double value = healthInfoRepository.findAvgInWeekByUserIdAndTypeAndCreateTime(userId,type, now.minusWeeks(i));
-            Long time = (long) now.minusWeeks(i).getMonthValue();
+            Long time = (long) now.minusWeeks(i).get(WeekFields.of(Locale.getDefault()).weekOfWeekBasedYear());
             HealthInfoResponseDTO healthInfoResponseDTO = HealthInfoResponseDTO.builder()
                     .value(value)
                     .time(time)
