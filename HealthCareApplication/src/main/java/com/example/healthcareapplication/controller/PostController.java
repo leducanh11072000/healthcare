@@ -20,7 +20,7 @@ public class PostController {
 
 
     @GetMapping("/post/user/{userId}")
-    DataResponse getAllByUserId (@Valid @NotNull @Positive @PathVariable Long userId, @RequestParam @Positive Long pageNo,@RequestParam @Positive Long pageSize) {
+    DataResponse getAllByUserId (@Valid @NotNull @PathVariable Long userId, @RequestParam Long pageNo,@RequestParam Long pageSize) {
         return postService.getAllByUserId(userId,pageNo,pageSize);
     };
     @GetMapping("/post")
