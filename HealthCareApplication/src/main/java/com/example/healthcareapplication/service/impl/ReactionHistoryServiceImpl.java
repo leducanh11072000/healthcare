@@ -39,7 +39,7 @@ public class ReactionHistoryServiceImpl  implements ReactionHistoryService {
     public DataResponse createHistory(CreateReactionDTO createReactionDTO) {
         try {
             List<ReactionHistory> reactionHistories = reactionHistoryRepository.findAllByUserIdAndStatus(createReactionDTO.getUserId(),Common.ACTIVE_STATUS);
-            ReactionHistory reactionHistory = reactionHistories.stream().filter(e -> e.getEntityReactionId().equals(createReactionDTO.getEntityId())).findFirst().orElse(null);
+            ReactionHistory reactionHistory = reactionHistories.stream().filter(e -> e.getEntityReactionId().equals(createReactionDTO.getEntityId()) && e.getIsPost() == createReactionDTO.getIsPost()).findFirst().orElse(null);
             Reaction reaction = reactionRepository.findById(createReactionDTO.getReactionId()).orElse(null);
             if ( reactionHistory != null) {
                 if (reactionHistory.getIsLike() == createReactionDTO.getIsLike()) {
@@ -57,7 +57,7 @@ public class ReactionHistoryServiceImpl  implements ReactionHistoryService {
                     reaction.setLike(reaction.getLike()+1);
                     reaction.setDislike(reaction.getDislike()-1);
                 } else {
-                    reaction.setLike(reaction.getDislike()-1);
+                    reaction.setLike(reaction.getLike()-1);
                     reaction.setDislike(reaction.getDislike()+1);
                 }
                 reactionRepository.save(reaction);
