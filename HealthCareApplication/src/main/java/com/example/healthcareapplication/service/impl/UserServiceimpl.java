@@ -65,7 +65,7 @@ public class UserServiceimpl implements UserService {
                 .userName(registerUserDTO.getUsername())
                 .email(registerUserDTO.getEmail())
                 .password(registerUserDTO.getPassword())
-                .avatarAddress(Common.UPLOAD_DIRECTORY + IMAGE_DEFAULt.stream().findAny().orElse(IMAGE_DEFAULt.get(0)))
+                .avatarAddress(IMAGE_DEFAULt.stream().findAny().orElse(IMAGE_DEFAULt.get(0)))
                 .tagName("@"+registerUserDTO.getUsername())
                 .build();
         return new DataResponse(HttpStatus.OK.value(), Common.SUCCESS, userRepository.save(newUser));
