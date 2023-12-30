@@ -80,4 +80,9 @@ public class UserServiceimpl implements UserService {
         user.setAvatarAddress(response.getData().toString());
         return new DataResponse(HttpStatus.OK.value(), Common.SUCCESS, userRepository.save(user));
     }
+
+    @Override
+    public DataResponse count(Long userId) {
+        return new DataResponse(HttpStatus.OK.value(), Common.SUCCESS, 100);
+    }
 }

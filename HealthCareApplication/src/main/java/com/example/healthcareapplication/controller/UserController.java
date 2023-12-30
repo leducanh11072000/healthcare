@@ -32,4 +32,8 @@ public class UserController {
     DataResponse register(@RequestParam Long userId,@Valid @NotNull @RequestParam("file") MultipartFile multipartFile) throws IOException {
         return  userService.updateAvatar(userId,multipartFile);
     }
+    @GetMapping("/user/countReaction")
+    DataResponse count(@RequestParam Long userId){
+        return  userService.count(userId);
+    }
 }

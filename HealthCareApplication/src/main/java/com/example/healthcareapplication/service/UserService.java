@@ -17,4 +17,6 @@ public interface UserService {
     DataResponse register(RegisterUserDTO registerUserDTO);
 
     DataResponse updateAvatar(Long userId, MultipartFile multipartFile) throws IOException;
+
+    DataResponse count(Long userId);
 }
