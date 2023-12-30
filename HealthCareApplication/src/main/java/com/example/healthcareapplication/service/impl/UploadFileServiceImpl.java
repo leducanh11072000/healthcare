@@ -23,7 +23,7 @@ public class UploadFileServiceImpl implements UploadFileService {
         Path fileNameAndPath = Paths.get(Common.UPLOAD_DIRECTORY, file.getOriginalFilename());
         fileNames.append(file.getOriginalFilename());
         Files.write(fileNameAndPath, file.getBytes());
-        return new DataResponse(HttpStatus.OK.value(), Common.SUCCESS, fileNameAndPath.toString());
+        return new DataResponse(HttpStatus.OK.value(), Common.SUCCESS, file.getOriginalFilename());
     }
 
     @Override
