@@ -28,7 +28,7 @@ public class UserServiceimpl implements UserService {
     private final UserRepository userRepository;
     @Autowired
     private final UploadFileService uploadFileService;
-    final List<String> IMAGE_DEFAULt = Arrays.asList("/images1.jpg","/images2.jpg","/images3.jpg","/images4.jpg");
+    final List<String> IMAGE_DEFAULt = Arrays.asList("images1.jpg","images2.jpg","images3.jpg","images4.jpg");
     @Override
     public User getUserById(Long id) {
         return userRepository.findById(id).orElse(null);
