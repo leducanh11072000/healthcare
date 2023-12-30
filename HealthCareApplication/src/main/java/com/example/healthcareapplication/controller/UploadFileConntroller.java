@@ -1,6 +1,7 @@
 package com.example.healthcareapplication.controller;
 
 import com.example.healthcareapplication.customAnnotation.RestApiV1;
+import com.example.healthcareapplication.model.Common;
 import com.example.healthcareapplication.model.dto.DataResponse;
 import com.example.healthcareapplication.service.UploadFileService;
 import jakarta.validation.Valid;
@@ -33,6 +34,12 @@ public class UploadFileConntroller {
     @GetMapping("/upload/display")
     public ResponseEntity<byte[]> displayImage(@RequestParam(value = "path") String path) throws IOException, SQLException
     {
+        return uploadFileService.displayImages(path);
+    }
+    @GetMapping("/upload/display/{image}")
+    public ResponseEntity<byte[]> displayImagePath(@PathVariable(value = "image") String image) throws IOException, SQLException
+    {
+        String path = Common.UPLOAD_DIRECTORY + "\\" + image;
         return uploadFileService.displayImages(path);
     }
 }
