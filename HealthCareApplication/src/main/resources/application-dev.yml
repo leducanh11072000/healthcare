@@ -12,6 +12,8 @@ spring:
     multipart:
       max-request-size: 1GB
       max-file-size: 1GB
+  resources:
+  static-locations: classpath:/static/,file:///C:\Users\admin\Documents\WorkingWithGit\healthcare\HealthCareApplication\src\main\resources\static\
   jpa:
     #    cấu hình loại database
     database: mysql

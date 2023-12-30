@@ -5,7 +5,7 @@ public class Common {
     public static final Long ACTIVE_STATUS = 1L;
     public static final Long INACTIVE_STATUS = 0L;
 
-    public static String UPLOAD_DIRECTORY = System.getProperty("user.dir") + "/uploads";
+    public static String UPLOAD_DIRECTORY = System.getProperty("user.dir") + "/src/main/resources/static";
     public static class HEALTH_INFO {
         public static final Long HEIGHT = 1L;
         public static final Long WEIGHT = 2L;
