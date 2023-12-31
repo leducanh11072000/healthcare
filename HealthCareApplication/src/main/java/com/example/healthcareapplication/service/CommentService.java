@@ -21,4 +21,6 @@ public interface CommentService {
 
     DataResponse deleteComment(CommentDTO commentDTO);
     List<CommentResponseDTO> getByPostIdInside(Long postId);
+    List<CommentResponseDTO> getAllByUserId(Long userId);
+
 }

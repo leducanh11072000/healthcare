@@ -9,4 +9,5 @@ public interface ReactionHistoryService {
 
     DataResponse getReactionHistoryByUserId(Long userId);
     DataResponse createHistory(CreateReactionDTO createReactionDTO);
+    DataResponse count(Long userId);
 }

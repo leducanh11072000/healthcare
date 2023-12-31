@@ -2,16 +2,14 @@ package com.example.healthcareapplication.service.impl;
 
 import com.example.healthcareapplication.model.Common;
 import com.example.healthcareapplication.model.User;
-import com.example.healthcareapplication.model.dto.DataResponse;
-import com.example.healthcareapplication.model.dto.RegisterUserDTO;
-import com.example.healthcareapplication.model.dto.UserInfoDTO;
-import com.example.healthcareapplication.model.dto.UserLoginDto;
+import com.example.healthcareapplication.model.dto.*;
 import com.example.healthcareapplication.repository.UserRepository;
-import com.example.healthcareapplication.service.UploadFileService;
-import com.example.healthcareapplication.service.UserService;
+import com.example.healthcareapplication.service.*;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.antlr.v4.runtime.misc.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Slf4j

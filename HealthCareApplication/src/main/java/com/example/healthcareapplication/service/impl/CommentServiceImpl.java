@@ -105,6 +105,18 @@ public class CommentServiceImpl implements CommentService {
         return commentResponseDTOList;
     }
 
+    @Override
+    public List<CommentResponseDTO> getAllByUserId(Long userId) {
+        try {
+            List<Comment> postList = commentRepository.getAllByUserIdAndStatus(userId,Common.ACTIVE_STATUS);
+            List<CommentResponseDTO> postResponseDTOS = convertFromComment(postList);
+            return postResponseDTOS;
+        }catch (Exception e) {
+            log.error(e.getMessage(),e);
+            return null;
+        }
+    }
+
     private List<CommentResponseDTO> convertFromComment(List<Comment> comments) {
         return comments.stream().map(comment -> {
             Reaction reaction = reactionService.getById(comment.getReactionId());

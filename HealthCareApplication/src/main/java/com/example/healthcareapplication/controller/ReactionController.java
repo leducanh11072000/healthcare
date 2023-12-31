@@ -28,4 +28,8 @@ public class ReactionController {
     DataResponse reactionPost (@RequestBody CreateReactionDTO createReactionDTO){
         return reactionHistoryService.createHistory(createReactionDTO);
     }
+    @GetMapping("/user/countReaction")
+    DataResponse count(@RequestParam Long userId){
+        return  reactionHistoryService.count(userId);
+    }
 }

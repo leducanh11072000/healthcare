@@ -3,18 +3,21 @@ package com.example.healthcareapplication.service.impl;
 import com.example.healthcareapplication.model.Common;
 import com.example.healthcareapplication.model.Reaction;
 import com.example.healthcareapplication.model.ReactionHistory;
-import com.example.healthcareapplication.model.dto.CreateReactionDTO;
-import com.example.healthcareapplication.model.dto.DataResponse;
+import com.example.healthcareapplication.model.dto.*;
 import com.example.healthcareapplication.repository.ReactionHistoryRepository;
 import com.example.healthcareapplication.repository.ReactionRepository;
+import com.example.healthcareapplication.service.CommentService;
+import com.example.healthcareapplication.service.PostService;
 import com.example.healthcareapplication.service.ReactionHistoryService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Service
@@ -24,6 +27,12 @@ public class ReactionHistoryServiceImpl  implements ReactionHistoryService {
     private final ReactionHistoryRepository reactionHistoryRepository;
     @Autowired
     private final ReactionRepository reactionRepository;
+    @Autowired
+    @Lazy
+    private final PostService postService;
+    @Autowired
+    @Lazy
+    private final CommentService commentService;
     @Override
     public DataResponse getReactionHistoryByUserId(Long userId) {
         try {
@@ -82,5 +91,20 @@ public class ReactionHistoryServiceImpl  implements ReactionHistoryService {
             log.error(e.getMessage(),e);
             return new DataResponse(HttpStatus.BAD_REQUEST.value(), e.getMessage(), null);
         }
+    }
+    @Override
+    public DataResponse count(Long userId) {
+        List<PostResponseDTO> postResponseDTOS = (List<PostResponseDTO>) postService.getAllByUserId(userId,0L,10000L).getData();
+        List<CommentResponseDTO> commentResponseDTOS = commentService.getAllByUserId(userId);
+        Long like =0L;
+        postResponseDTOS.stream().map(e -> like + e.getReactionDTO().getLike()).collect(Collectors.toList());
+        commentResponseDTOS.stream().map(e -> like + e.getReactionDTO().getLike()).collect(Collectors.toList());
+
+        Long dislike =0L;
+        postResponseDTOS.stream().map(e -> dislike + e.getReactionDTO().getDislike()).collect(Collectors.toList());
+        commentResponseDTOS.stream().map(e -> dislike + e.getReactionDTO().getDislike()).collect(Collectors.toList());
+
+        ReactionDTO reactionDTO = ReactionDTO.builder().like(like).dislike(dislike).build();
+        return new DataResponse(HttpStatus.OK.value(), Common.SUCCESS, reactionDTO);
     }
 }
