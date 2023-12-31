@@ -60,7 +60,7 @@ public class PostServiceImpl implements PostService {
             String listTagId =null;
             if (insertPostDTO.getTags() != null) {
                 StringJoiner stringJoiner = new StringJoiner(",");
-                List<String> listTagNameBeforeValidate = Arrays.stream(insertPostDTO.getTags().trim().split(",")).filter(""::equals).toList();
+                List<String> listTagNameBeforeValidate = Arrays.stream(insertPostDTO.getTags().trim().split(",")).filter(e->!"".equals(e)).toList();
                 listTagNameBeforeValidate.stream().map(e -> {
                     Tag tag;
                     if (tagService.isExist(e)) {
