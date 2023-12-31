@@ -75,7 +75,7 @@ public class ReactionHistoryServiceImpl  implements ReactionHistoryService {
             if (createReactionDTO.getIsLike()) {
                 reaction.setLike(reaction.getLike()+1);
             } else {
-                reaction.setDislike(reaction.getDislike()-1);
+                reaction.setDislike(reaction.getDislike()+1);
             }
             reactionRepository.save(reaction);
             ReactionHistory newHistory = ReactionHistory.builder()
