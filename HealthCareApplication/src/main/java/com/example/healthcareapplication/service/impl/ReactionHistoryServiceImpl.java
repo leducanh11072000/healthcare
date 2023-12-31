@@ -96,13 +96,21 @@ public class ReactionHistoryServiceImpl  implements ReactionHistoryService {
     public DataResponse count(Long userId) {
         List<PostResponseDTO> postResponseDTOS = (List<PostResponseDTO>) postService.getAllByUserId(userId,0L,10000L).getData();
         List<CommentResponseDTO> commentResponseDTOS = commentService.getAllByUserId(userId);
-        Long like =0L;
-        postResponseDTOS.stream().map(e -> like + e.getReactionDTO().getLike()).collect(Collectors.toList());
-        commentResponseDTOS.stream().map(e -> like + e.getReactionDTO().getLike()).collect(Collectors.toList());
+        Long like = 0L;
+        for (PostResponseDTO e : postResponseDTOS) {
+            like = like + e.getReactionDTO().getLike();
+        }
+        for (CommentResponseDTO e : commentResponseDTOS) {
+            like = like + e.getReactionDTO().getLike();
+        }
 
-        Long dislike =0L;
-        postResponseDTOS.stream().map(e -> dislike + e.getReactionDTO().getDislike()).collect(Collectors.toList());
-        commentResponseDTOS.stream().map(e -> dislike + e.getReactionDTO().getDislike()).collect(Collectors.toList());
+        Long dislike = 0L;
+        for (PostResponseDTO e : postResponseDTOS) {
+            dislike = dislike + e.getReactionDTO().getDislike();
+        }
+        for (CommentResponseDTO e : commentResponseDTOS) {
+            dislike = dislike + e.getReactionDTO().getDislike();
+        }
 
         ReactionDTO reactionDTO = ReactionDTO.builder().like(like).dislike(dislike).build();
         return new DataResponse(HttpStatus.OK.value(), Common.SUCCESS, reactionDTO);
